@@ -1,4 +1,6 @@
 import 'package:arti_genius/helper/helper.dart';
+import 'package:arti_genius/presentation/widgets/custom_loading.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyDialog {
@@ -33,5 +35,10 @@ class MyDialog {
       backgroundColor: redColor.withOpacity(.8),
       colorText: whiteColor,
     );
+  }
+
+  //loading dialog
+  static void showLoadingDialog() {
+    Get.dialog(const Center(child: CustomLoading()));
   }
 }

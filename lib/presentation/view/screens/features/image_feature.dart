@@ -25,75 +25,78 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Image Generation'),
-      ),
-      //body
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(
-          top: mq.height * .02,
-          bottom: mq.height * .1,
-          left: mq.width * .04,
-          right: mq.width * .04,
+        appBar: AppBar(
+          title: const Text('Image Generation'),
         ),
-        children: [
-          //textfield
-          TextFormField(
-            controller: _controller.imageC,
-            textAlign: TextAlign.center,
-            minLines: 2,
-            maxLines: null,
-            onTapOutside: (e) => FocusScope.of(context).unfocus(),
-            decoration: InputDecoration(
-              hintText:
-                  'Imagine Something wonderful &\nType here & I will create it for you..',
-              hintStyle: textTheme.bodyLarge?.copyWith(
-                  fontFamily: GoogleFonts.robotoMono().fontFamily,
-                  color: blackColorLight),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+        //body
+        body: ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.only(
+            top: mq.height * .02,
+            bottom: mq.height * .1,
+            left: mq.width * .04,
+            right: mq.width * .04,
+          ),
+          children: [
+            //textfield
+            TextFormField(
+              controller: _controller.imageC,
+              textAlign: TextAlign.center,
+              minLines: 2,
+              maxLines: null,
+              onTapOutside: (e) => FocusScope.of(context).unfocus(),
+              decoration: InputDecoration(
+                hintText:
+                    'Imagine something wonderful & innovative\nType here & I will create for you 😃',
+                hintStyle: textTheme.bodySmall?.copyWith(
+                    fontFamily: GoogleFonts.robotoMono().fontFamily,
+                    color: blackColorLight),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
                 ),
               ),
             ),
-          ),
 //ai image
-          Container(
-            height: mq.height * .5,
-            alignment: Alignment.center,
-            child: Obx(
-              () => _aiImage(),
+            Container(
+              height: mq.height * .5,
+              alignment: Alignment.center,
+              child: Obx(
+                () => _aiImage(),
+              ),
             ),
-          ),
 
-          //btn
-          CustomButton(
-              onTap: () {
-                _controller.createAIImage();
-              },
-              text: 'Create'),
-        ],
-      ),
-      //download btn
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(right: 6, bottom: 6),
-        child: FloatingActionButton(
-          backgroundColor: blueColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
-          ),
-          onPressed: () {},
-          child: const Icon(
-            Icons.save_alt_rounded,
-            color: whiteColor,
-            size: 26,
-          ),
+            //btn
+            CustomButton(
+                onTap: () {
+                  _controller.createAIImage();
+                },
+                text: 'Create'),
+          ],
         ),
-      ),
-    );
+        //download btn
+        floatingActionButton: Obx(
+          () => _controller.status.value == Status.complete
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 6, bottom: 6),
+                  child: FloatingActionButton(
+                    backgroundColor: blueColor,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    onPressed: _controller.downloadImage,
+                    child: const Icon(
+                      Icons.save_alt_rounded,
+                      color: whiteColor,
+                      size: 26,
+                    ),
+                  ),
+                )
+              : const SizedBox(),
+        ));
   }
 
   Widget _aiImage() => ClipRRect(

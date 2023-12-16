@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'package:arti_genius/helper/global_constant.dart';
 import 'package:http/http.dart';
 
 class ChatApi {
@@ -14,8 +15,7 @@ class ChatApi {
               //headers
               headers: {
                 HttpHeaders.contentTypeHeader: 'application/json',
-                HttpHeaders.authorizationHeader:
-                    'Bearer ${dotenv.env['apiKey']}'
+                HttpHeaders.authorizationHeader: 'Bearer $apiKey}'
               },
               //body
               body: jsonEncode({
