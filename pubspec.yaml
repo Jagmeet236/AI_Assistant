@@ -1,0 +1,65 @@
+name: arti_genius
+description: An AI Assistant (ChatBot, Image Generator & Language Translator)
+  App Based on ChatGPT developed by Jagmeet Singh.
+publish_to: 'none'
+
+# App Version
+version: 0.1.0
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+dependencies:
+
+  animated_text_kit: ^4.2.2
+
+  cached_network_image: ^3.3.0
+
+  cupertino_icons: ^1.0.6
+
+  dart_openai: ^5.0.0
+
+  flutter:
+    sdk: flutter
+    
+  flutter_animate: ^4.3.0
+
+
+  get: ^4.6.6
+
+  google_fonts: ^6.1.0
+
+  hive: ^4.0.0-dev.2
+
+  http: ^1.1.2
+
+  isar_flutter_libs: ^4.0.0-dev.13
+
+  lottie: ^2.7.0
+
+  path_provider: ^2.1.0
+
+# for image picker
+image_picker: ^0.8.6
+
+#for saving the image in the gallery
+gallery_saver_updated: ^3.0.0
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+  # For changing app icon
+  icons_launcher: ^2.1.5
+
+flutter:
+  #Enables Material Design
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    
+    - assets/
+    - assets/images/
+    - assets/lottie/
