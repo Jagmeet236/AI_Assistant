@@ -22,9 +22,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: appName,
-        theme: appTheme,
-        debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+      title: appName,
+      theme: appTheme,
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+    );
   }
 }

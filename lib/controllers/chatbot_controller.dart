@@ -29,7 +29,7 @@ class ChatController extends GetxController {
 
       textC.text = '';
     } else {
-      MyDialog.info('Ask Me Something');
+      MyDialog.info('Ask Something!');
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:arti_genius/controllers/image_controller.dart';
 import 'package:arti_genius/helper/global_constant.dart';
 import 'package:arti_genius/presentation/presentation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +28,20 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Image Generation'),
+          actions: [
+            Obx(() => _controller.status.value == Status.complete
+                ? IconButton(
+                    onPressed: _controller.shareImage,
+                    icon: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.share,
+                        color: blueColor,
+                      ),
+                    ),
+                  )
+                : const SizedBox()),
+          ],
         ),
         //body
         body: ListView(
@@ -58,13 +73,25 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
                 ),
               ),
             ),
+            //giving space
+            SizedBox(
+              height: mq.height * .02,
+            ),
+
 //ai image
-            Container(
-              height: mq.height * .5,
-              alignment: Alignment.center,
-              child: Obx(
-                () => _aiImage(),
+            Card(
+              elevation: 0.4,
+              child: Container(
+                height: mq.height * .5,
+                alignment: Alignment.center,
+                child: Obx(
+                  () => _aiImage(),
+                ),
               ),
+            ),
+//giving space
+            SizedBox(
+              height: mq.height * .02,
             ),
 
             //btn
