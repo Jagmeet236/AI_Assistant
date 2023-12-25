@@ -25,7 +25,13 @@ class _ChatBotFeatureState extends State<ChatBotFeature> {
     return Scaffold(
       //app bar
       appBar: AppBar(
-        title: const Text('Chat with AI Assistant'),
+        title: Text(
+          'Chat with AI Assistant',
+          style: textTheme.titleMedium?.copyWith(
+              color: blueColor,
+              letterSpacing: 0.1,
+              fontFamily: GoogleFonts.robotoMono().fontFamily),
+        ),
       ),
 
       //send message field & btn

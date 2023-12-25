@@ -4,6 +4,7 @@ import 'package:arti_genius/presentation/presentation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,13 +23,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // initializing text theme
+    final textTheme = Theme.of(context).textTheme;
+
     //initializing device size
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
         //app bar
         appBar: AppBar(
-          title: const Text(appName),
+          title: Text(
+            appName,
+            style: textTheme.titleLarge?.copyWith(
+                color: blueColor,
+                letterSpacing: 0.1,
+                fontFamily: GoogleFonts.robotoMono().fontFamily),
+          ),
           actions: const [
             Icon(
               Icons.brightness_4_sharp,

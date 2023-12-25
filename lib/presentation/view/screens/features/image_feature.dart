@@ -27,7 +27,13 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Image Generation'),
+          title: Text(
+            'Image Generation',
+            style: textTheme.titleMedium?.copyWith(
+                color: blueColor,
+                letterSpacing: 0.1,
+                fontFamily: GoogleFonts.robotoMono().fontFamily),
+          ),
           actions: [
             Obx(() => _controller.status.value == Status.complete
                 ? IconButton(
@@ -73,26 +79,22 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
                 ),
               ),
             ),
-            //giving space
-            SizedBox(
-              height: mq.height * .02,
-            ),
 
-//ai image
-            Card(
-              elevation: 0.4,
-              child: Container(
-                height: mq.height * .5,
-                alignment: Alignment.center,
-                child: Obx(
-                  () => _aiImage(),
-                ),
+            //giving space
+            sizedBoxC,
+
+            //ai image
+
+            Container(
+              alignment: Alignment.center,
+              height: mq.height * .5,
+              child: Obx(
+                () => _aiImage(),
               ),
             ),
+
 //giving space
-            SizedBox(
-              height: mq.height * .02,
-            ),
+            sizedBoxC,
 
             //btn
             CustomButton(
