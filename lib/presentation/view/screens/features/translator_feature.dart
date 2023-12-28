@@ -3,6 +3,7 @@ import 'package:arti_genius/helper/global_constant.dart';
 import 'package:arti_genius/presentation/presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TranslatorFeature extends StatefulWidget {
@@ -13,10 +14,9 @@ class TranslatorFeature extends StatefulWidget {
 }
 
 class _TranslatorFeatureState extends State<TranslatorFeature> {
+  final _controller = TranslateController();
   @override
   Widget build(BuildContext context) {
-    final _controller = TranslateController();
-
     // initializing text theme
     final textTheme = Theme.of(context).textTheme;
 
@@ -44,60 +44,86 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //from language
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                width: mq.width * 0.4,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: blueColor,
+              InkWell(
+                onTap: () => Get.bottomSheet(LanguageSheet(
+                  langC: _controller,
+                  str: _controller.from,
+                )),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50,
+                  width: mq.width * 0.4,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: blueColor,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15),
+                    ),
                   ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  'Auto',
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: blueColor,
-                    letterSpacing: 0.1,
-                    fontFamily: GoogleFonts.robotoMono().fontFamily,
+                  child: Obx(
+                    () => Text(
+                      _controller.from.isEmpty
+                          ? 'Auto'
+                          : _controller.from.value,
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: blackColor,
+                        letterSpacing: 0.1,
+                        fontFamily: GoogleFonts.robotoMono().fontFamily,
+                      ),
+                    ),
                   ),
                 ),
               ),
 
-              //swipe button
+              //swap button
+              //swipe language btn
               IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.repeat,
-                    color: greyColor,
+                  onPressed: _controller.swapLanguages,
+                  icon: Obx(
+                    () => Icon(
+                      CupertinoIcons.repeat,
+                      color: _controller.to.isNotEmpty &&
+                              _controller.from.isNotEmpty
+                          ? blueColor
+                          : greyColor,
+                    ),
                   )),
-
               //to language
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                width: mq.width * 0.4,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: blueColor,
+              InkWell(
+                onTap: () => Get.bottomSheet(LanguageSheet(
+                  langC: _controller,
+                  str: _controller.to,
+                )),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50,
+                  width: mq.width * 0.4,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: blueColor,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15),
+                    ),
                   ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  'To',
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: blueColor,
-                    letterSpacing: 0.1,
-                    fontFamily: GoogleFonts.robotoMono().fontFamily,
+                  child: Obx(
+                    () => Text(
+                      _controller.to.isEmpty ? 'To' : _controller.to.value,
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: blackColor,
+                        letterSpacing: 0.1,
+                        fontFamily: GoogleFonts.robotoMono().fontFamily,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
+
           //textfield
           Padding(
             padding: EdgeInsets.symmetric(
@@ -123,33 +149,39 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
 
           //resultField
 
-          if (_controller.resultC.text.isNotEmpty)
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: mq.width * .04,
-              ),
-              child: TextFormField(
-                controller: _controller.resultC,
-                maxLines: null,
-                onTapOutside: (e) => FocusScope.of(context).unfocus(),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          Obx(() => _translateResult()),
+
           //adding some space
           SizedBox(
             height: mq.height * .04,
           ),
 
           //translate button
-          CustomButton(onTap: () {}, text: 'Translate')
+          CustomButton(onTap: _controller.translate, text: 'Translate')
         ],
       ),
     );
   }
+
+  Widget _translateResult() => switch (_controller.status.value) {
+        Status.none => const SizedBox(),
+        Status.complete => Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: mq.width * .04,
+            ),
+            child: TextFormField(
+              controller: _controller.resultC,
+              maxLines: null,
+              onTapOutside: (e) => FocusScope.of(context).unfocus(),
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        Status.loading => const Align(child: CustomLoading())
+      };
 }

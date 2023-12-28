@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:arti_genius/helper/global_constant.dart';
 import 'package:http/http.dart';
 
 class ChatApi {
-//get answer from chat gpt
+  //get answer from chat gpt
   static Future<String> getAnswer(String question) async {
     try {
       //
@@ -15,8 +16,9 @@ class ChatApi {
               //headers
               headers: {
                 HttpHeaders.contentTypeHeader: 'application/json',
-                HttpHeaders.authorizationHeader: 'Bearer $apiKey}'
+                HttpHeaders.authorizationHeader: 'Bearer $apiKey'
               },
+
               //body
               body: jsonEncode({
                 "model": "gpt-3.5-turbo",
@@ -28,10 +30,11 @@ class ChatApi {
               }));
 
       final data = jsonDecode(res.body);
-      print('res: $data');
+
+      log('res: $data');
       return data['choices'][0]['message']['content'];
     } catch (e) {
-      print('getAnswerE: $e');
+      log('getAnswerE: $e');
       return 'Something went wrong (Try again in sometime)';
     }
   }
