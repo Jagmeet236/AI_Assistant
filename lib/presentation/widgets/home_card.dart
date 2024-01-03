@@ -1,4 +1,5 @@
 import 'package:arti_genius/helper/global_constant.dart';
+import 'package:arti_genius/helper/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,7 +49,7 @@ class HomeCard extends StatelessWidget {
                     Text(
                       homeType.title,
                       style: textTheme.titleMedium?.copyWith(
-                          color: blackColor,
+                          color: Theme.of(context).lightTextColor,
                           fontFamily: GoogleFonts.robotoMono().fontFamily,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 0.5),
@@ -65,7 +66,7 @@ class HomeCard extends StatelessWidget {
                     Text(
                       homeType.title,
                       style: textTheme.titleMedium?.copyWith(
-                          color: blackColor,
+                          color: Theme.of(context).lightTextColor,
                           fontFamily: GoogleFonts.robotoMono().fontFamily,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 0.5),

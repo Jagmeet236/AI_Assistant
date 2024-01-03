@@ -25,15 +25,10 @@ class _ChatBotFeatureState extends State<ChatBotFeature> {
     return Scaffold(
       //app bar
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Chat with AI Assistant',
-          style: textTheme.titleMedium?.copyWith(
-              color: blueColor,
-              letterSpacing: 0.1,
-              fontFamily: GoogleFonts.robotoMono().fontFamily),
         ),
       ),
-
       //send message field & btn
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
@@ -48,13 +43,13 @@ class _ChatBotFeatureState extends State<ChatBotFeature> {
             textAlign: TextAlign.center,
             onTapOutside: (e) => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
-              fillColor: Colors.white,
+              fillColor: Theme.of(context).scaffoldBackgroundColor,
               filled: true,
               isDense: true,
               hintText: 'Ask me anything you want...',
               hintStyle: textTheme.bodyLarge?.copyWith(
                   fontFamily: GoogleFonts.robotoMono().fontFamily,
-                  color: blackColorLight),
+                  color: Theme.of(context).lightTextColor),
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(50),
@@ -68,7 +63,7 @@ class _ChatBotFeatureState extends State<ChatBotFeature> {
 
           //send button
           CircleAvatar(
-            backgroundColor: blueColor,
+            backgroundColor: Theme.of(context).buttonColor,
             radius: 24,
             child: IconButton(
               onPressed: _controller.askQuestion,

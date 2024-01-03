@@ -1,4 +1,5 @@
 import 'package:arti_genius/helper/global_constant.dart';
+import 'package:arti_genius/helper/helper.dart';
 import 'package:arti_genius/presentation/presentation.dart';
 
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class OnBoardingScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: textTheme.bodyMedium?.copyWith(
                       letterSpacing: .5,
-                      color: greyColor,
+                      color: Theme.of(context).lightTextColor,
                       fontFamily: GoogleFonts.robotoMono().fontFamily),
                 ),
               ),

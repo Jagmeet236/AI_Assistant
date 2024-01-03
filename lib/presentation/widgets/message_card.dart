@@ -36,7 +36,7 @@ class MessageCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: mq.height * .01, horizontal: mq.width * .02),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black54),
+                  border: Border.all(color: Theme.of(context).lightTextColor),
                   borderRadius: const BorderRadius.only(
                       topLeft: r, topRight: r, bottomRight: r)),
               child: message.msg.isEmpty
@@ -66,7 +66,7 @@ class MessageCard extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     vertical: mq.height * .01, horizontal: mq.width * .02),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black54),
+                    border: Border.all(color: Theme.of(context).lightTextColor),
                     borderRadius: const BorderRadius.only(
                         topLeft: r, topRight: r, bottomLeft: r)),
                 child: Text(
@@ -77,10 +77,10 @@ class MessageCard extends StatelessWidget {
                       letterSpacing: 0.2),
                 )),
 
-            const CircleAvatar(
+            CircleAvatar(
               radius: 18,
               backgroundColor: Colors.white,
-              child: Icon(Icons.person, color: Colors.blue),
+              child: Icon(Icons.person, color: Theme.of(context).buttonColor),
             ),
 
             const SizedBox(width: 6),

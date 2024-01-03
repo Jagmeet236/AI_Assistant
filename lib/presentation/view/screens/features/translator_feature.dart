@@ -1,5 +1,6 @@
 import 'package:arti_genius/controllers/translate_controller.dart';
-import 'package:arti_genius/helper/global_constant.dart';
+
+import 'package:arti_genius/helper/helper.dart';
 import 'package:arti_genius/presentation/presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,8 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
     mq = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Multi Language Translator',
-          style: textTheme.titleMedium?.copyWith(
-              color: blueColor,
-              letterSpacing: 0.1,
-              fontFamily: GoogleFonts.robotoMono().fontFamily,
-              fontWeight: FontWeight.bold),
+        title: const Text(
+          'Language Translator',
         ),
       ),
       body: ListView(
@@ -68,7 +64,7 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
                           ? 'Auto'
                           : _controller.from.value,
                       style: textTheme.bodyMedium?.copyWith(
-                        color: blackColor,
+                        color: Theme.of(context).lightTextColor,
                         letterSpacing: 0.1,
                         fontFamily: GoogleFonts.robotoMono().fontFamily,
                       ),
@@ -113,7 +109,7 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
                     () => Text(
                       _controller.to.isEmpty ? 'To' : _controller.to.value,
                       style: textTheme.bodyMedium?.copyWith(
-                        color: blackColor,
+                        color: Theme.of(context).lightTextColor,
                         letterSpacing: 0.1,
                         fontFamily: GoogleFonts.robotoMono().fontFamily,
                       ),
@@ -137,7 +133,7 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
                 hintText: 'Translate anything you want...',
                 hintStyle: textTheme.bodyMedium?.copyWith(
                     fontFamily: GoogleFonts.robotoMono().fontFamily,
-                    color: blackColorLight),
+                    color: Theme.of(context).lightTextColor),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),

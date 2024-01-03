@@ -4,7 +4,7 @@ import 'package:arti_genius/presentation/presentation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _isDarkMode = Pref.isDarkMode.obs;
   @override
   void initState() {
     super.initState();
@@ -23,28 +24,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // initializing text theme
-    final textTheme = Theme.of(context).textTheme;
-
     //initializing device size
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
         //app bar
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             appName,
-            style: textTheme.titleLarge?.copyWith(
-                color: blueColor,
-                letterSpacing: 0.1,
-                fontFamily: GoogleFonts.robotoMono().fontFamily),
           ),
-          actions: const [
-            Icon(
-              Icons.brightness_4_sharp,
-              color: blueColor,
-            ),
-            sizedBoxR
+          actions: [
+            IconButton(
+                padding: const EdgeInsets.only(right: 10),
+                onPressed: () {
+                  Get.changeThemeMode(
+                      _isDarkMode.value ? ThemeMode.light : ThemeMode.dark);
+
+                  _isDarkMode.value = !_isDarkMode.value;
+                  Pref.isDarkMode = _isDarkMode.value;
+                },
+                icon: Obx(() => Icon(
+                    _isDarkMode.value
+                        ? Icons.brightness_3_rounded
+                        : Icons.brightness_4_rounded,
+                    size: 26)))
           ],
         ),
         //body

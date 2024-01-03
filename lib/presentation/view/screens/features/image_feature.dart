@@ -1,5 +1,6 @@
 import 'package:arti_genius/controllers/image_controller.dart';
 import 'package:arti_genius/helper/global_constant.dart';
+import 'package:arti_genius/helper/helper.dart';
 import 'package:arti_genius/presentation/presentation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -27,12 +28,8 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Image Generation',
-            style: textTheme.titleMedium?.copyWith(
-                color: blueColor,
-                letterSpacing: 0.1,
-                fontFamily: GoogleFonts.robotoMono().fontFamily),
           ),
           actions: [
             Obx(() => _controller.status.value == Status.complete
@@ -42,7 +39,6 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
                       padding: EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.share,
-                        color: blueColor,
                       ),
                     ),
                   )
@@ -71,7 +67,7 @@ class _ImageGenerationFeatureState extends State<ImageGenerationFeature> {
                     'Imagine something wonderful & innovative\nType here & I will create for you 😃',
                 hintStyle: textTheme.bodySmall?.copyWith(
                     fontFamily: GoogleFonts.robotoMono().fontFamily,
-                    color: blackColorLight),
+                    color: Theme.of(context).lightTextColor),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),

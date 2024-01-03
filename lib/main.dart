@@ -23,8 +23,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: appName,
-      theme: appTheme,
+      themeMode: Pref.defaultTheme,
+
+      //dark theme
+      darkTheme: darkTheme,
+
+      //light theme
+      theme: lightTheme,
+
       debugShowCheckedModeBanner: false,
+
       home: const SplashScreen(),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:arti_genius/helper/global_constant.dart';
+import 'package:arti_genius/helper/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
-            backgroundColor: blueColor,
+            backgroundColor: Theme.of(context).buttonColor,
             foregroundColor: whiteColor,
             elevation: 0,
             textStyle: textTheme.titleLarge?.copyWith(
